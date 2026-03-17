@@ -250,7 +250,7 @@ prompt_toolkit==3.0.52
 propcache==0.4.1
 protobuf==6.33.1
 py_rust_stemmers==0.1.5
-pyasn1==0.6.1
+pyasn1==0.6.3
 pydantic_core==2.41.5
 Pygments==2.19.2
 python-dateutil==2.9.0.post0
