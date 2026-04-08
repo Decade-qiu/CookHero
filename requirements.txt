@@ -32,7 +32,7 @@ langchain-milvus==0.3.0       # LangChain Milvus 集成
 # LangChain 生态系统
 # ----------------------------------------------------------------------------
 langchain==1.1.0              # LangChain 核心框架
-langchain-core==1.2.11         # LangChain 核心抽象
+langchain-core==1.2.28         # LangChain 核心抽象
 langchain-community==0.4.1    # 社区集成
 langchain-openai==1.1.0       # OpenAI 集成
 langchain-text-splitters==1.0.0  # 文本分割工具
