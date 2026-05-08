@@ -185,7 +185,7 @@ annotated-types==0.7.0
 annoy==1.17.3
 appdirs==1.4.4
 attrs==25.4.0
-banks==2.2.0
+banks==2.4.2
 bracex==2.6
 certifi==2025.11.12
 cfgv==3.5.0
