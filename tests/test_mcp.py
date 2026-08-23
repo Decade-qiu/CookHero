@@ -7,9 +7,13 @@ Run from project root: python -m tests.test_mcp
 """
 
 import asyncio
+import importlib.util
 import logging
 import sys
 from pathlib import Path
+from types import SimpleNamespace
+from unittest import IsolatedAsyncioTestCase
+from unittest.mock import AsyncMock, Mock, patch
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -186,6 +190,47 @@ async def main():
     except Exception as e:
         logger.exception(f"Test failed: {e}")
         print(f"\nTest failed with error: {e}")
+
+
+class TestParallelSearchMCP(IsolatedAsyncioTestCase):
+    def load_setup(self, enabled):
+        module_name = "cookhero_mcp_setup_test"
+        agent_hub = Mock()
+        modules = {
+            "app.agent.registry": SimpleNamespace(AgentHub=agent_hub),
+            "app.agent.tools.providers.mcp": SimpleNamespace(MCPToolProvider=object),
+            "app.config": SimpleNamespace(
+                settings=SimpleNamespace(
+                    mcp=SimpleNamespace(
+                        parallel_search=SimpleNamespace(enabled=enabled)
+                    )
+                )
+            ),
+        }
+        spec = importlib.util.spec_from_file_location(
+            module_name, Path(__file__).parents[1] / "app/agent/tools/mcp/setup.py"
+        )
+        module = importlib.util.module_from_spec(spec)
+        with patch.dict(sys.modules, modules):
+            spec.loader.exec_module(module)
+        return module._register_parallel_search_mcp, agent_hub, modules
+
+    async def test_disabled_does_not_access_provider(self):
+        register, agent_hub, modules = self.load_setup(enabled=False)
+        with patch.dict(sys.modules, modules):
+            await register()
+        agent_hub.get_provider.assert_not_called()
+
+    async def test_opted_in_registers_and_loads_tools(self):
+        register, agent_hub, modules = self.load_setup(enabled=True)
+        provider = Mock(load_server_tools=AsyncMock(return_value=[Mock()]))
+        agent_hub.get_provider.return_value = provider
+        with patch.dict(sys.modules, modules):
+            await register()
+        provider.register_server.assert_called_once_with(
+            "parallel_search", "https://search.parallel.ai/mcp"
+        )
+        provider.load_server_tools.assert_awaited_once_with("parallel_search")
 
 
 if __name__ == "__main__":

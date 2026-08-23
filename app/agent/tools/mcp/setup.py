@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 async def register_mcp_servers() -> None:
     """注册所有 MCP 服务器。"""
     await _register_amap_mcp()
+    await _register_parallel_search_mcp()
     await _register_custom_mcp_servers()
 
 
@@ -24,6 +25,28 @@ async def _register_custom_mcp_servers() -> None:
         await mcp_service.register_all()
     except Exception as e:
         logger.warning(f"Failed to register custom MCP servers: {e}")
+
+
+async def _register_parallel_search_mcp() -> None:
+    """Register the optional, anonymous Parallel Search MCP server."""
+    from app.agent.tools.providers.mcp import MCPToolProvider
+    from app.config import settings
+
+    if not settings.mcp.parallel_search.enabled:
+        logger.info("Parallel Search MCP is disabled, skipping registration")
+        return
+
+    mcp_provider: MCPToolProvider = AgentHub.get_provider("mcp")  # type: ignore
+    mcp_provider.register_server(
+        "parallel_search",
+        "https://search.parallel.ai/mcp",
+    )
+
+    try:
+        loaded = await mcp_provider.load_server_tools("parallel_search")
+        logger.info("Loaded %s tools from Parallel Search MCP", len(loaded))
+    except Exception as e:
+        logger.error("Failed to load Parallel Search MCP tools: %s", e)
 
 
 async def _register_amap_mcp() -> None:

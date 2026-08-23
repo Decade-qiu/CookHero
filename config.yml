@@ -235,6 +235,12 @@ mcp:
     enabled: true
   # amap_api_key: Loaded from .env (AMAP_API_KEY)
 
+  # Optional anonymous web search and URL fetching through Parallel Search MCP.
+  # When enabled, search objectives, search queries, and requested page URLs are
+  # sent to https://search.parallel.ai/mcp. No account or API key is required.
+  parallel_search:
+    enabled: false
+
 # =============================================================================
 # 10. Data Source Configuration
 # =============================================================================

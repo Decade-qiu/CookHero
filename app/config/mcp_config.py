@@ -21,3 +21,4 @@ class MCPConfig(BaseModel):
 
     amap_api_key: Optional[str] = None  # Loaded from .env (AMAP_API_KEY)
     amap: MCPServerConfig = MCPServerConfig()
+    parallel_search: MCPServerConfig = MCPServerConfig(enabled=False)
