@@ -11,7 +11,7 @@
 # ----------------------------------------------------------------------------
 fastapi==0.122.0              # 高性能 Web 框架
 uvicorn==0.38.0               # ASGI 服务器
-starlette==0.50.0             # FastAPI 底层框架
+starlette==1.0.1             # FastAPI 底层框架
 pydantic==2.12.5              # 数据验证
 pydantic-settings==2.12.0     # 配置管理
 
