@@ -35,7 +35,7 @@ langchain==1.1.0              # LangChain 核心框架
 langchain-core==1.2.11         # LangChain 核心抽象
 langchain-community==0.4.1    # 社区集成
 langchain-openai==1.1.0       # OpenAI 集成
-langchain-text-splitters==1.0.0  # 文本分割工具
+langchain-text-splitters==1.1.2  # 文本分割工具
 langchain-anthropic==1.3.0    # Anthropic 集成
 langchain-tavily==0.2.16      # Tavily 集成
 langchain-huggingface==1.1.0  # HuggingFace 集成
