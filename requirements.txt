@@ -59,7 +59,7 @@ langchain-classic==1.0.0      # LangChain Classic
 # ----------------------------------------------------------------------------
 sentence-transformers==5.1.2  # 句子嵌入模型
 huggingface-hub==0.36.0       # HuggingFace 模型下载
-transformers==4.57.3          # HuggingFace Transformers
+transformers==5.0.0rc3          # HuggingFace Transformers
 
 # ----------------------------------------------------------------------------
 # LLM 提供商
