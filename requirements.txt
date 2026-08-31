@@ -44,7 +44,7 @@ langchain-huggingface==1.1.0  # HuggingFace 集成
 # LangGraph
 # ----------------------------------------------------------------------------
 langgraph==1.0.4              # LangGraph 框架
-langgraph-checkpoint==3.0.1   # LangGraph Checkpoint
+langgraph-checkpoint==4.0.0   # LangGraph Checkpoint
 langgraph-prebuilt==1.0.5     # LangGraph Prebuilt
 langgraph-sdk==0.2.10         # LangGraph SDK
 
