@@ -279,7 +279,7 @@ typing_extensions==4.15.0
 tzdata==2025.2
 urllib3==2.5.0
 uuid_utils==0.12.0
-virtualenv==20.35.4
+virtualenv==20.36.1
 watchdog==6.0.0
 wcmatch==10.1
 wcwidth==0.2.14
