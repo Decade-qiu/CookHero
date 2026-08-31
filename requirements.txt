@@ -252,7 +252,7 @@ protobuf==6.33.1
 py_rust_stemmers==0.1.5
 pyasn1==0.6.1
 pydantic_core==2.41.5
-Pygments==2.19.2
+Pygments==2.20.0
 python-dateutil==2.9.0.post0
 pytz==2025.2
 regex==2025.11.3
